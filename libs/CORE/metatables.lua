@@ -1,3 +1,4 @@
+local lib = require("lib")
 --[[
 Metatables for various things with working in an ECS environment.
 This file is the core of the *magic* of this library allowing
@@ -12,9 +13,11 @@ exports.ENVMETA = {
             local typescheme = x("SCHEME")
             table.insert(t._SYSTEM_POOL, {typescheme, x})
         elseif x == "table" then
-            for k,v in ipairs(x) do
-
+            local typestructure = lib.types.list()
+            for key,val in ipairs(x) do
+                typestructure:push({key, val})
             end
+            t._COMPS:push()
         end
     end,
     __index = _G

@@ -1,8 +1,6 @@
-local LIST = {}
-
-setmetatable(LIST, {__call = function(...)
+return setmetatable({}, {__call = function(...)
     local t = {...}
-    function t:append(v) 
+    function t:push(v) 
         table.insert(self, v)
     end
     function t:pop()
@@ -13,5 +11,3 @@ setmetatable(LIST, {__call = function(...)
     t.__list = true
     return t
 end})
-
-return LIST

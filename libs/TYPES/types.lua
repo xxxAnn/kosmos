@@ -1,3 +1,4 @@
 return {
-    list = require("TYPES/list")
+    list = require("TYPES/list"),
+    dict = require("TYPES/dict")
 }
