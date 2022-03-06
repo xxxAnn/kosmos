@@ -1,8 +1,5 @@
-local here = ...
-here = here .. "/" 
-
-local pub = {
-
+return {
+    CORE = require("CORE/core"),
+    UTILS = require("UTILS/utils"),
+    TYPES = require("TYPES/types")
 }
-
-return pub

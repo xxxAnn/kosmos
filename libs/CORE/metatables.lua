@@ -1,15 +1,23 @@
--- <MOD>
-local MOD_escmeta = {}
+--[[
+Metatables for various things with working in an ECS environment.
+This file is the core of the *magic* of this library allowing
+natural and simple ECS code.
+]]--
+local exports = {}
 
-MOD_escmeta.ENVMETA = {
+exports.ENVMETA = {
     __newindex = function (t,k,v)
         local x = type(v)
         if x == "function" then
-            --# STORE IN SYSTEM POOL
+            local typescheme = x("SCHEME")
+            table.insert(t._SYSTEM_POOL, {typescheme, x})
         elseif x == "table" then
-            
+            for k,v in ipairs(x) do
+
+            end
         end
-    end
+    end,
+    __index = _G
 }
 --[[
 ==================================================================
@@ -22,7 +30,7 @@ local MyComponent = {
 
 local MyOtherComponent = {
     a = "number",
-    b = "number"
+    b = "table"
 }
 ==================================================================
 CRUD ENTITYs:
@@ -55,5 +63,4 @@ will be what was returned as the "SCHEME".
 ==================================================================
 ]]--
 
-return MOD_escmeta
--- </MOD>
+return exports
