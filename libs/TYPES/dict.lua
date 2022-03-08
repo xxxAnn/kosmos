@@ -2,7 +2,7 @@ local hash = require("UTILS/utils").hash
 local linkedlist = require("TYPES/linkedlist")
 
 return setmetatable({}, {__call = function()
-    local t = 
+    local t = linkedlist()
     setmetatable(t, {
         __newindex = function (tab,k,v)
             local keyhash = hash(k)
