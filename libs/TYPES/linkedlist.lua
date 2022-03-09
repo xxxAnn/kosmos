@@ -1,9 +1,6 @@
 return setmetatable({}, {__call = function()
     local headnode = {VAL = nil, NEXT = nil}
     function GetNodeAtIndex(t,k, stopifnil)
-        if k == 1 then
-            return t
-        end
         local cnode = t
         for x=2,k do
             if rawget(cnode, "NEXT") ~= nil then
