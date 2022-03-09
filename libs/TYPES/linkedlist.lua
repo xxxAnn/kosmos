@@ -23,7 +23,7 @@ return setmetatable({}, {__call = function()
             rawset(GetNodeAtIndex(t,k), "VAL", v)
         end,
         __index=function (t,k)
-            return rawget(GetNodeAtIndex(t,k), "VAL")
+            return rawget(GetNodeAtIndex(t,k, true), "VAL")
         end,
     })
 end})
