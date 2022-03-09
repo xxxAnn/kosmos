@@ -2,7 +2,7 @@ return setmetatable({}, {__call = function()
     local headnode = {VAL = nil, NEXT = nil}
     function GetNodeAtIndex(t,k, stopifnil)
         local cnode = t
-        for x=2,k do
+        for _=2,k do
             if rawget(cnode, "NEXT") ~= nil then
                 cnode = rawget(cnode, "NEXT")
             else 
