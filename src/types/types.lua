@@ -1,3 +1,5 @@
+-- Copyright (C) 2023 Ann Mauduy-Decius
+
 local special_types = require("src/types/special_types")
 
 local types_mt = {}

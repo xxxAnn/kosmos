@@ -1,4 +1,6 @@
--- This creates special types without using the src/types/types API.
+-- Copyright (C) 2023 Ann Mauduy-Decius
+
+-- This files adds special types without using the src/types/types API.
 -- This is to avoid self-reference problems within the src/types/types API.
 
 local special_types = {}
