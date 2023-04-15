@@ -3,6 +3,8 @@ local utils = {}
 local function pretty_print_wrapper(tp, i) 
     if type(tp) ~= "table" or tp.__special_print == true then 
         local m =  tostring(tp)
+        -- Strings have quotation marks added arround them, other special print types
+        -- should handle adding them or not on their own
         if type(tp) == "string" then return '"' .. m .. '"' else return m end
     end
     local n = ""
