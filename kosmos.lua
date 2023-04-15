@@ -2,6 +2,6 @@
 
 local KOSMOS = {}
 
-KOSMOS.types = require("src/types/types")
+KOSMOS.components = require("src/components/components")
 
 return KOSMOS

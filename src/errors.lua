@@ -3,7 +3,7 @@
 -- This files adds special types without using the src/types/types API.
 -- This is to avoid self-reference problems within the src/types/types API.
 
-local special_types = {}
+local errors = {}
 
 local error_wat_mt = {}
 local error_wrong_argument_type = {}
@@ -29,6 +29,7 @@ function error_wat_mt:__call(arg)
 end
 
 setmetatable(error_wrong_argument_type, error_wat_mt)
-special_types.errors = {wrong_argument_type = error_wrong_argument_type}
 
-return special_types
+errors.wrong_argument_type = error_wrong_argument_type
+
+return errors
