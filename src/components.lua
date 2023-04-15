@@ -14,7 +14,7 @@ function comps.getId(t)
     return type(t)
 end
 
-function comps_mt:__call(id, t)
+function comps.new(id, t)
     local comp_mt = {}
     local comp = t or {}
 
@@ -29,19 +29,24 @@ function comps_mt:__call(id, t)
 
         o.__id = id -- Special marker
         o.__is_component = true
+        o.__special_print = false
         for k, v in pairs(comp) do
-            if comps.getId(arg[k]) == v and k ~= "__id" then
-                o[k] = arg[k]
-            else
-                error(
-                    string.format("Expected key '%s' to be of type %s in call to '%s'. Got object of type %s.", 
-                    k, 
-                    v, 
-                    string.format("%s constructor", id), 
-                    comps.getId(arg[k]))
-                )
+            if string.sub(k, 1, 1) ~= "_" then
+                if comps.getId(arg[k]) == v then
+                        o[k] = arg[k]
+                else
+                    error(
+                        string.format("Expected key '%s' to be of type %s in call to '%s'. Got object of type %s.", 
+                        k, 
+                        v, 
+                        string.format("%s constructor", id), 
+                        comps.getId(arg[k]))
+                    )
+                end
             end
         end
+
+        if type(comp.__init) == "function" then comp.__init(o, getmetatable(o)) end
 
         return o
     end
@@ -51,6 +56,8 @@ function comps_mt:__call(id, t)
     setmetatable(comp, comp_mt)
     return comp
 end
+
+comps.get = comps.new
 
 setmetatable(comps, comps_mt)
 return comps

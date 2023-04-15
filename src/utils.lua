@@ -1,7 +1,10 @@
 local utils = {}
 
 local function pretty_print_wrapper(tp, i) 
-    if type(tp) ~= "table" then return tostring(tp) end
+    if type(tp) ~= "table" or tp.__special_print == true then 
+        local m =  tostring(tp)
+        if type(tp) == "string" then return '"' .. m .. '"' else return m end
+    end
     local n = ""
     if tp.__is_component == true then 
         n = "Comp (" .. tp.__id .. ") "

@@ -31,6 +31,13 @@ function query_mt:__call(q)
             table.insert(temp, temp1)
         end
     end
+
+    function temp:then_call(f)
+        if type(f) ~= "function" then error("Expected function.") end
+        for _, v in ipairs(self) do
+            f(v)
+        end
+    end
     
     return temp
 end
