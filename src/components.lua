@@ -1,6 +1,6 @@
 -- Copyright (C) 2023 Ann Mauduy-Decius
 
-local errors = require("src/errors")
+local utils = require("src/utils")
 
 local comps_mt = {}
 local comps = {}
@@ -25,20 +25,28 @@ function comps_mt:__call(id, t)
     end
 
     function comp_mt:__call(arg)
-        local o = {}
+        local o = utils.pretty_print_table()
 
         o.__id = id -- Special marker
+        o.__is_component = true
         for k, v in pairs(comp) do
             if comps.getId(arg[k]) == v and k ~= "__id" then
                 o[k] = arg[k]
             else
-                local err = errors.wrong_argument_type{expected = v, got = comps.getId(arg[k]), key = k, fname = string.format("%s constructor", id)}
-                err:err()
+                error(
+                    string.format("Expected key '%s' to be of type %s in call to '%s'. Got object of type %s.", 
+                    k, 
+                    v, 
+                    string.format("%s constructor", id), 
+                    comps.getId(arg[k]))
+                )
             end
         end
 
         return o
     end
+
+
 
     setmetatable(comp, comp_mt)
     return comp

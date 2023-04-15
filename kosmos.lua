@@ -2,6 +2,8 @@
 
 local KOSMOS = {}
 
-KOSMOS.components = require("src/components/components")
+KOSMOS.components = require("src/components")
+KOSMOS.entities = require("src/pool")
+KOSMOS.query = require("src/query")
 
 return KOSMOS

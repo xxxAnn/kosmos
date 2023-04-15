@@ -9,7 +9,10 @@ local my_comp_value = my_comp_again{x = {}}
 local my_comp_2 = kosmos.components("my_comp_2", {x = "my_comp"})
 -- Creates a component of type 'my_comp_2'
 local my_comp_2_value = my_comp_2{x = my_comp_value}
--- Prints the component id of the my_comp_2 value
-print(my_comp_2_value.__id)
 
+local string_wrapper = kosmos.components("string_wrapper", {c = "string"})
 
+kosmos.entities:spawn({string_wrapper{c = "hi"}, my_comp_value, my_comp_2_value})
+kosmos.entities:spawn({string_wrapper{c = "hi"}})
+
+print(kosmos.query{"my_comp_2", "my_comp"})
