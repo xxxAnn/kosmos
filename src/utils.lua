@@ -9,7 +9,7 @@ local function pretty_print_wrapper(tp, i)
     end
     local n = ""
     if tp.__is_component == true then 
-        n = "Comp (" .. tp.__id .. ") "
+        n = "Comp<" .. tp.__id .. "> "
     else
         n = "BaseTable " 
     end
@@ -20,7 +20,7 @@ local function pretty_print_wrapper(tp, i)
             dit = true
             if type(k) ~= 'number' then k = '"'..k..'"' end
 
-            s = s .. string.rep("   ", i or 0) .. '['..k..'] = ' .. pretty_print_wrapper(v, (i or 0)+1) .. ",\n"
+            s = s .. string.rep("   ", i or 0) .. k..': ' .. pretty_print_wrapper(v, (i or 0)+1) .. ",\n"
         end
     end
     if #s > 2 and dit then
