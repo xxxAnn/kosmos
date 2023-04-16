@@ -17,6 +17,10 @@ end
 function comps.new(id, t)
     local comp_mt = {}
     local comp = t or {}
+    -- The default constructor
+    function comp.__new(...) 
+        return table.pack(...)[1]
+    end
 
     if comps[id] ~= nil then 
         return comps[id] 
@@ -24,12 +28,15 @@ function comps.new(id, t)
         comps[id] = comp
     end
 
-    function comp_mt:__call(arg)
+    function comp_mt:__call(...)
         local o = utils.pretty_print_table()
 
         o.__id = id -- Special marker
         o.__is_component = true
         o.__special_print = false
+
+        local arg = comp.__new(...)
+
         for k, v in pairs(comp) do
             if string.sub(k, 1, 1) ~= "_" then
                 if comps.getId(arg[k]) == v then
