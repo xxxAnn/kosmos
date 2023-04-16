@@ -1,4 +1,5 @@
 local kosmos = require("kosmos")
+local extras = kosmos.extras
 -- Creates a component type with one field called 'x' which must have a type of 'table'
 local my_comp = kosmos.components.new("my_comp", {x = "position2D"})
 -- This should obtain the type that was just created through its id
@@ -12,10 +13,16 @@ local my_comp_2 = kosmos.components.new("my_comp_2", {x = "my_comp", y = "string
 local my_comp_2_value = my_comp_2{x = my_comp_value, y = "foobar"}
 -- Creates a component type with one field called 'c' which must have a type of 'string'
 -- Spawn two entities with different components
-kosmos.entities:spawn({kosmos.defaults.string_wrapper{c = "foo"}, my_comp_value, my_comp_2_value})
-kosmos.entities:spawn({kosmos.defaults.string_wrapper{c = "bar"}})
+kosmos.entities:spawn({extras.defaults.string_wrapper{c = "foo"}, my_comp_value, my_comp_2_value})
+kosmos.entities:spawn({extras.defaults.string_wrapper{c = "bar"}})
 
 kosmos.query{"str"}:then_call(function (q) 
     print("Calling function on query!")
     print(q)
 end)
+
+extras.clock.every_s(1).call_func(function () 
+    print("TEST")
+end)
+
+extras.clock.execute_for_s(3)
