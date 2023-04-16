@@ -19,7 +19,7 @@ function comps.new(id, t)
     local comp = t or {}
     -- The default constructor
     function comp.__new(...) 
-        return table.pack(...)[1]
+        if type(comp.__build) == "function" then return comp.__build(...) else return table.pack(...)[1] end
     end
 
     if comps[id] ~= nil then 
