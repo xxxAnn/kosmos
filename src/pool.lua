@@ -7,7 +7,7 @@ local entities = utils.pretty_print_table()
 -- TODO: prevent p from having duplicate components
 function entities:spawn(p)
     local c = utils.pretty_print_table() 
-    for i, comp in ipairs(p) do
+    for _, comp in ipairs(p) do
         if comp.__is_component ~= true then 
             error("Non-component in entity.")
         end
@@ -17,6 +17,11 @@ function entities:spawn(p)
             error("Duplicate component in entity.")
         end
     end
+    local p_mt = {}
+    p_mt.__index = p_mt
+    p_mt.__is_entity = true
+
+    setmetatable(p, p_mt)
     table.insert(self, p)
 end
 

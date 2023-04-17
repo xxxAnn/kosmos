@@ -28,6 +28,10 @@ function query_mt:__call(q)
             for _, comp in ipairs(entity) do
                 temp1[components.getId(comp)] = comp
             end
+            local temp1_mt = getmetatable(temp1)
+
+            temp1_mt.__index = getmetatable(entity)
+
             table.insert(temp, temp1)
         end
     end

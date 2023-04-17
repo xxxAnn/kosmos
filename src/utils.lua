@@ -7,11 +7,11 @@ local function pretty_print_wrapper(tp, i)
         -- should handle adding them or not on their own
         if type(tp) == "string" then return '"' .. m .. '"' else return m end
     end
-    local n = ""
+    local n = "BaseTable "
     if tp.__is_component == true then 
         n = "Comp<" .. tp.__id .. "> "
-    else
-        n = "BaseTable " 
+    elseif tp.__is_entity == true then 
+        n = "Entity "
     end
     local dit = false
     local s = n .. '{\n'
