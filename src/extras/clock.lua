@@ -5,6 +5,7 @@
 -- except in rudimentary code
 -- because the timer is extremely inaccurate
 -- if LOVE or sockets or another library is used
+-- their timers should be used
 
 local clock = {}
 
